@@ -13,22 +13,21 @@ function generateNumber(max){
 }
 
 // function to give peramiters to a random number. Pass through true or false.
-function genRndNumb(upper, lower, numeric, special){
-  var rndCount = 0
+function selectedTypeArrayLength(upper, lower, numeric, special){
+  var lengthCount = 0
   if(upper === true){
-    upperCase.length += rndCount;
+    lengthCount += upperCase.length;
   }
   if(lower === true){
-    lowerCase.length += rndCount;
+    lengthCount += lowerCase.length;
   }
   if(numeric === true){
-    numeric.length += rndCount;
+    lengthCount += numericValue.length;
   }
   if(special === true){
-    special.length += rndCount;
+    lengthCount += specialChar.length;
   }
-  var rndNumb = generateNumber(rndCount);
-  return(rndNumb);
+  return(lengthCount);
 }
 
 // function to create an array out of the selected character types
@@ -49,9 +48,53 @@ function addSelectedCharacters(selectUpper, selectLower, selectNumb, selectSpeci
   return allTypes;
 }
 
-// testing
-var num = genRndNumb(true, true, true, true);
-console.log(num)
+// Function to generate the password. acsepts (passwordLength, )
+function generatePassword(desiredLength, combinedArrayLength, selectUpper, selectLower, selectNumb, selectSpecial){
+  var wordArray = [];
+  var rn = 0;
+  var a = 0;
+  var b = 0;
+  var c = 0;
+  var d = 0;
+
+  for(i = 0; i < desiredLength; i++){
+    if(a < 2  && selectUpper === true){
+      rn = generateNumber(upperCase.length);
+      wordArray.push(upperCase.at(rn)); 
+      a++;
+    }      
+    else if(b < 2 && selectLower === true){
+      rn = generateNumber(lowerCase.length);
+      wordArray.push(lowerCase.at(rn)); 
+      b++;
+    }      
+    else if(c < 2 && selectNumb === true){
+      rn = generateNumber(numericValue.length);
+      wordArray.push(numericValue.at(rn));
+      c++; 
+   }      
+    else if(d < 2 && selectSpecial === true){
+      rn = generateNumber(specialChar.length);
+      wordArray.push(specialChar.at(rn));
+      d++; 
+    }
+    else {
+      rn = generateNumber(combinedArrayLength);
+      wordArray.push(combArray.at(rn));
+    }
+  }
+  return wordArray.join("");  
+}
+
+
+
+// testing run addSelectedCharacterTypes and selectedTypeArrayLength functions first, once you have the pass through values. Then run generate password.
+var num = selectedTypeArrayLength(true, true, true, true);
+console.log(num);
+var combArray = addSelectedCharacters(true, true, true, true);
+console.log(combArray);
+var word = generatePassword(8, num, true, true, true, true);
+console.log(word);
 
 
 // Write password to the #password input

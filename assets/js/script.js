@@ -31,8 +31,21 @@ function genRndNumb(upper, lower, numeric, special){
 }
 
 // function to create an array out of the selected character types
-function selectedCharacters(selectUpper, selectLower, selectNumb, selectSpecial){
-  
+function addSelectedCharacters(selectUpper, selectLower, selectNumb, selectSpecial){
+  var allTypes = [];
+  if(selectUpper.isarray){
+    allTypes.concat(ipperCase);
+  }
+  if(selectLower.isarray){
+    allTypes.concat(lowerCase);
+  }
+  if(selectNumb.isarray){
+    allTypes.concat(numericValue);
+  }
+  if(selectSpecial.isarray){
+    allTypes.concat(specialChar);
+  }
+  return allTypes.length;
 }
 // Write password to the #password input
 function writePassword() {

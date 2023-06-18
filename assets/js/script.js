@@ -112,7 +112,7 @@ function getUserData(){
   // prompt for password length
   for(x = true; x === true; x){
     for(i = true; i === true; i){
-      var usernumberData = prompt("How long would you like your password to be? (8-128)", "Enter Number Here!");
+      var usernumberData = prompt("How long would you like your password to be? Enter a number from 8 - 128)", "Enter Number Here!");
       var userNumberConverted = parseInt(usernumberData, 10);
       if(typeof userNumberConverted === "number" && userNumberConverted >= 8 && userNumberConverted <= 128){
         passwordLength = userNumberConverted;

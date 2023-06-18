@@ -110,82 +110,99 @@ function writePassword() {
 // Function to get promts from user
 function getUserData(){
   // prompt for password length
-  for(i = true; i === true; i){
-    var usernumberData = prompt("How long would you like your password to be? (8-128)", "Enter text here!");
-    var userNumberConverted = parseInt(usernumberData, 10);
-    if(typeof userNumberConverted !== "number" || userNumberConverted < 8 || userNumberConverted > 128){
-      alert("Error: Please enter a valid number");
+  for(x = true; x === true; x){
+    for(i = true; i === true; i){
+      var usernumberData = prompt("How long would you like your password to be? (8-128)", "8 - 128");
+      var userNumberConverted = parseInt(usernumberData, 10);
+      if(typeof userNumberConverted !== "number" || userNumberConverted < 8 || userNumberConverted > 128){
+        alert("Error: Please enter a valid number");
+      }
+      else{
+        passwordLength = userNumberConverted;
+        alert("You have selected a length of " + passwordLength);
+        i = false;
+      }    
+    }
+  // prompt to include ipper case letters
+    for(i = true; i === true; i){
+      var userData = prompt("Would you like UPPER CASE letters in your password?", "'YES' or 'NO'");
+      var userDataConverted = userData.toLowerCase(); 
+      if(userDataConverted === "yes"){
+        selectUpper = true;
+        alert("Upper case letters will be added to your password!");
+        i = false;
+      }
+      else if(userDataConverted === "no"){
+        selectUpper = false;
+        alert("Upper case letters will NOT be added to your password!");
+        i = false;
+      }
+      else{      
+        alert("Error: Please enter 'YES' or 'NO'");
+      }
+    
+    }
+  // prompt to include Lower case letters
+    for(i = true; i === true; i){
+      var userData = prompt("Would you like LOWER CASE letters in your password?", "'YES' or 'NO'");
+      var userDataConverted = userData.toLowerCase(); 
+      if(userDataConverted === "yes"){
+        selectLower = true;
+        alert("Lower case letters will be added to your password!");
+        i = false;
+      }
+      else if(userDataConverted === "no"){
+        selectLower = false;
+        alert("Lower case letters will NOT be added to your password!");
+        i = false;
+      }
+      else{      
+        alert("Error: Please enter 'YES' or 'NO'");
+      }
+    }
+    // prompt to include numbers
+    for(i = true; i === true; i){
+      var userData = prompt("Would you like NUMBERS in your password?", "'YES' or 'NO'");
+      var userDataConverted = userData.toLowerCase(); 
+      if(userDataConverted === "yes"){
+        selectNumb = true;
+        alert("Numbers will be added to your password!");
+        i = false;
+      }
+      else if(userDataConverted === "no"){
+        selectNumb = false;
+        alert("Numbers will NOT be added to your password!");
+        i = false;
+      }
+      else{      
+        alert("Error: Please enter 'YES' or 'NO'");
+      }
+    } 
+    // prompt to include special characters
+    for(i = true; i === true; i){
+      var userData = prompt("Would you like SPESIAL CHARACTERS in your password?", "'YES' or 'NO'");
+      var userDataConverted = userData.toLowerCase(); 
+      if(userDataConverted === "yes"){
+        selectSpecial = true;
+        alert("Special characters will be added to your password!");
+        i = false;
+      }
+      else if(userDataConverted === "no"){
+        selectSpecial = false;
+        alert("Special characters will NOT be added to your password!");
+        i = false;
+      }
+      else{      
+        alert("Error: Please enter 'YES' or 'NO'");
+      }
+    } 
+    if(selectUpper === false && selectLower === false && selectNumb === false && selectSpecial === false){
+      alert("NO CHARACTER TYPE SELECTED! PLEASE SELCET AT LEAST ONE TYPE")
     }
     else{
-      passwordLength = userNumberConverted;
-      i = false;
-    }    
-  }
-  // prompt to include ipper case letters
-  for(i = true; i === true; i){
-    var userData = prompt("Would you like UPPER CASE letters in your password?", "'YES' or 'NO'");
-    var userDataConverted = userData.toLowerCase(); 
-    if(userDataConverted === "yes"){
-      selectUpper = true;
-      i = false;
+      x = false;
     }
-    else if(userDataConverted === "no"){
-      selectUpper = false;
-      i = false;
-    }
-    else{      
-      alert("Error: Please enter 'YES' or 'NO'");
-    }
-    
-  }
-  // prompt to include Lower case letters
-  for(i = true; i === true; i){
-    var userData = prompt("Would you like LOWER CASE letters in your password?", "'YES' or 'NO'");
-    var userDataConverted = userData.toLowerCase(); 
-    if(userDataConverted === "yes"){
-      selectLower = true;
-      i = false;
-    }
-    else if(userDataConverted === "no"){
-      selectLower = false;
-      i = false;
-    }
-    else{      
-      alert("Error: Please enter 'YES' or 'NO'");
-    }
-  }
-  // prompt to include numbers
-  for(i = true; i === true; i){
-    var userData = prompt("Would you like NUMBERS in your password?", "'YES' or 'NO'");
-    var userDataConverted = userData.toLowerCase(); 
-    if(userDataConverted === "yes"){
-      selectNumb = true;
-      i = false;
-    }
-    else if(userDataConverted === "no"){
-      selectNumb = false;
-      i = false;
-    }
-    else{      
-      alert("Error: Please enter 'YES' or 'NO'");
-    }
-  } 
-  // prompt to include special characters
-  for(i = true; i === true; i){
-    var userData = prompt("Would you like SPESIAL CHARACTERS in your password?", "'YES' or 'NO'");
-    var userDataConverted = userData.toLowerCase(); 
-    if(userDataConverted === "yes"){
-      selectSpecial = true;
-      i = false;
-    }
-    else if(userDataConverted === "no"){
-      selectSpecial = false;
-      i = false;
-    }
-    else{      
-      alert("Error: Please enter 'YES' or 'NO'");
-    }
-  }   
+  }     
   // generates and writes password to .card
   writePassword(); 
   // change card bacckground to pink
@@ -209,6 +226,7 @@ function copyToClip(){
   var copiedText = document.getElementById("password");
   copiedText.select();
   navigator.clipboard.writeText(copiedText.value);
+  alert("Password Copied to Clipboard!")
 }
 // Add event listener to generate button
 generateBtn.addEventListener("click", getUserData);

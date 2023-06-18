@@ -58,22 +58,22 @@ function generatePassword(desiredLength, combinedArrayLength, selectUpper, selec
   var d = 0;
 
   for(i = 0; i < desiredLength; i++){
-    if(a < 2  && selectUpper === true){
+    if(i === 5  && selectUpper === true){
       rn = generateNumber(upperCase.length);
       wordArray.push(upperCase.at(rn)); 
       a++;
     }      
-    else if(b < 2 && selectLower === true){
+    else if(i === 3 && selectLower === true){
       rn = generateNumber(lowerCase.length);
       wordArray.push(lowerCase.at(rn)); 
       b++;
     }      
-    else if(c < 2 && selectNumb === true){
+    else if(i === 6 && selectNumb === true){
       rn = generateNumber(numericValue.length);
       wordArray.push(numericValue.at(rn));
       c++; 
-   }      
-    else if(d < 2 && selectSpecial === true){
+    }      
+    else if(i === 7 && selectSpecial === true){
       rn = generateNumber(specialChar.length);
       wordArray.push(specialChar.at(rn));
       d++; 

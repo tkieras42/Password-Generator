@@ -42,6 +42,10 @@ header {
   padding: 30px 40px;
 }
 
+.card-header{
+  text-align: center;
+}
+
 .card-header::after {
   content: " ";
   display: block;
@@ -70,11 +74,28 @@ header {
   content: " ";
   display: block;
   clear: both;
+  height: 5px;
 }
 
 .btn {
   border: none;
   background-color: hsl(360, 91%, 36%);
+  border-radius: 25px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px
+    0px;
+  color: hsl(0, 0%, 100%);
+  display: inline-block;
+  font-size: 22px;
+  line-height: 22px;
+  margin: 16px 16px 16px 20px;
+  padding: 14px 34px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.btn2 {
+  border: none;
+  background-color: hsl(128, 98%, 36%);
   border-radius: 25px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px
     0px;
@@ -115,8 +136,25 @@ button[disabled] {
   border: 2px dashed #c0c7cf;
   border-radius: 6px;
   resize: none;
-  overflow: hidden;
+  overflow: auto;
 }
+
+/* .question-box{
+  display: block; 
+  height: 350px;
+  width: 500px;
+  position: fixed;
+  background-color: silver;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.question-box h2{
+  text-align: center;
+  padding-top: 10px;
+} */
+
 
 @media (max-width: 690px) {
   .btn {
@@ -124,7 +162,11 @@ button[disabled] {
     margin: 16px 0px 0px 0px;
     padding: 10px 15px;
   }
-
+  .btn2 {
+    font-size: 1rem;
+    margin: 16px 0px 0px 0px;
+    padding: 10px 15px;
+  }
   #password {
     font-size: 1rem;
   }
@@ -132,6 +174,9 @@ button[disabled] {
 
 @media (max-width: 500px) {
   .btn {
+    font-size: 0.8rem;
+  }
+  .btn2 {
     font-size: 0.8rem;
   }
 }

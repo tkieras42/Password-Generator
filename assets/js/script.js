@@ -1,37 +1,47 @@
-// Assignment Code
+// Element Assignments 
 var generateBtn = document.querySelector("#generate");
+var copyClip = document.getElementById("copy")
 
+// Arrays with potential content of passwordsw
 var lowerCase = Array.of("a", "b", "c", "d", "e", "f", "g", "h", "i", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
 var upperCase = Array.of("A", "B", "C", "D", "E", "F", "G", "H", "I", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "W", "X", "Y", "Z");
 var numericValue = Array.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 var specialChar = Array.of("!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "^", "_", "`", "{", "|", "}", "~");
-var selectedTypes = Array.of();
 
-// function to make the random number
+// check box booleans
+var selectUpper = false;
+var selectLower = false;
+var selectNumb = false;
+var selectSpecial = false;
+// desired password length
+var passwordLength = 8
+
+// used in questionBox function
+// var qCheck = 0
+
+// Function to make the random number
 function generateNumber(max){
   return Math.floor(Math.random() * max);
 }
-
-// function to give peramiters to a random number. Pass through true or false.
-function selectedTypeArrayLength(upper, lower, numeric, special){
+// Function to give peramiters to a random number. Pass through true or false.
+function findTypeArrayLength(){
   var lengthCount = 0
-  if(upper === true){
+  if(selectUpper === true){
     lengthCount += upperCase.length;
   }
-  if(lower === true){
+  if(selectLower=== true){
     lengthCount += lowerCase.length;
   }
-  if(numeric === true){
+  if(selectNumb === true){
     lengthCount += numericValue.length;
   }
-  if(special === true){
+  if(selectSpecial === true){
     lengthCount += specialChar.length;
   }
   return(lengthCount);
 }
-
-// function to create an array out of the selected character types
-function addSelectedCharacters(selectUpper, selectLower, selectNumb, selectSpecial){
+// Function to create an array out of the selected character types
+function addSelectedCharacters(){
   var allTypes = Array.of();
   if(selectUpper === true){
     allTypes.push.apply(allTypes, upperCase);
@@ -47,8 +57,7 @@ function addSelectedCharacters(selectUpper, selectLower, selectNumb, selectSpeci
   }
   return allTypes;
 }
-
-// Function to generate the password. acsepts (passwordLength, )
+// Function to generate the password. (number, number, bool, bool, bool, bool)
 function generatePassword(desiredLength, combinedArrayLength, selectUpper, selectLower, selectNumb, selectSpecial){
   var wordArray = [];
   var rn = 0;
@@ -58,15 +67,15 @@ function generatePassword(desiredLength, combinedArrayLength, selectUpper, selec
   var d = 0;
 
   for(i = 0; i < desiredLength; i++){
-    if(i === 5  && selectUpper === true){
-      rn = generateNumber(upperCase.length);
-      wordArray.push(upperCase.at(rn)); 
-      a++;
-    }      
-    else if(i === 3 && selectLower === true){
+    if(i === 3 && selectLower === true){
       rn = generateNumber(lowerCase.length);
       wordArray.push(lowerCase.at(rn)); 
       b++;
+    }      
+    else if(i === 5  && selectUpper === true){
+      rn = generateNumber(upperCase.length);
+      wordArray.push(upperCase.at(rn)); 
+      a++;
     }      
     else if(i === 6 && selectNumb === true){
       rn = generateNumber(numericValue.length);
@@ -80,31 +89,128 @@ function generatePassword(desiredLength, combinedArrayLength, selectUpper, selec
     }
     else {
       rn = generateNumber(combinedArrayLength);
-      wordArray.push(combArray.at(rn));
+      wordArray.push(selectedTypes.at(rn));
     }
   }
   return wordArray.join("");  
 }
 
-
-
-// testing run addSelectedCharacterTypes and selectedTypeArrayLength functions first, once you have the pass through values. Then run generate password.
-var num = selectedTypeArrayLength(true, true, true, true);
-console.log(num);
-var combArray = addSelectedCharacters(true, true, true, true);
-console.log(combArray);
-var word = generatePassword(8, num, true, true, true, true);
-console.log(word);
-
-
-// Write password to the #password input
+// Function to write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  selectedTypes = addSelectedCharacters();
+  var selectedTypeArrayLength = findTypeArrayLength();
+ 
+  var password = generatePassword(passwordLength, selectedTypeArrayLength, selectUpper, selectLower, selectNumb, selectSpecial);
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
 
 }
 
+// Function to get promts from user
+function getUserData(){
+  // prompt for password length
+  for(i = true; i === true; i){
+    var usernumberData = prompt("How long would you like your password to be? (8-128)", "Enter text here!");
+    var userNumberConverted = parseInt(usernumberData, 10);
+    if(typeof userNumberConverted !== "number" || userNumberConverted < 8 || userNumberConverted > 128){
+      alert("Error: Please enter a valid number");
+    }
+    else{
+      passwordLength = userNumberConverted;
+      i = false;
+    }    
+  }
+  // prompt to include ipper case letters
+  for(i = true; i === true; i){
+    var userData = prompt("Would you like UPPER CASE letters in your password?", "'YES' or 'NO'");
+    var userDataConverted = userData.toLowerCase(); 
+    if(userDataConverted === "yes"){
+      selectUpper = true;
+      i = false;
+    }
+    else if(userDataConverted === "no"){
+      selectUpper = false;
+      i = false;
+    }
+    else{      
+      alert("Error: Please enter 'YES' or 'NO'");
+    }
+    
+  }
+  // prompt to include Lower case letters
+  for(i = true; i === true; i){
+    var userData = prompt("Would you like LOWER CASE letters in your password?", "'YES' or 'NO'");
+    var userDataConverted = userData.toLowerCase(); 
+    if(userDataConverted === "yes"){
+      selectLower = true;
+      i = false;
+    }
+    else if(userDataConverted === "no"){
+      selectLower = false;
+      i = false;
+    }
+    else{      
+      alert("Error: Please enter 'YES' or 'NO'");
+    }
+  }
+  // prompt to include numbers
+  for(i = true; i === true; i){
+    var userData = prompt("Would you like NUMBERS in your password?", "'YES' or 'NO'");
+    var userDataConverted = userData.toLowerCase(); 
+    if(userDataConverted === "yes"){
+      selectNumb = true;
+      i = false;
+    }
+    else if(userDataConverted === "no"){
+      selectNumb = false;
+      i = false;
+    }
+    else{      
+      alert("Error: Please enter 'YES' or 'NO'");
+    }
+  } 
+  // prompt to include special characters
+  for(i = true; i === true; i){
+    var userData = prompt("Would you like SPESIAL CHARACTERS in your password?", "'YES' or 'NO'");
+    var userDataConverted = userData.toLowerCase(); 
+    if(userDataConverted === "yes"){
+      selectSpecial = true;
+      i = false;
+    }
+    else if(userDataConverted === "no"){
+      selectSpecial = false;
+      i = false;
+    }
+    else{      
+      alert("Error: Please enter 'YES' or 'NO'");
+    }
+  }   
+  // generates and writes password to .card
+  writePassword(); 
+  // change card bacckground to pink
+  var cardColor = document.querySelector(".card-body");
+  cardColor.children[0].setAttribute("style", "background-color: pink");
+  // adds copy to clipborad button
+  createCopyBtn();
+}
+
+// adds copy to clip board button
+function createCopyBtn(){
+  var copyBtn = document.createElement("button");
+  var copyButton = document.getElementById("copy")
+  copyButton.appendChild(copyBtn);
+  copyBtn.setAttribute("class", "btn2");
+  copyBtn.textContent = "Copy to Clipboard!";
+}
+
+// copies text from text-area id = password
+function copyToClip(){
+  var copiedText = document.getElementById("password");
+  copiedText.select();
+  navigator.clipboard.writeText(copiedText.value);
+}
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", getUserData);
+copyClip.addEventListener("click", copyToClip);
+

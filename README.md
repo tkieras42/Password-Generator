@@ -22,4 +22,19 @@ a password generator with user able to choose
 
 ## Sceen Captures
 
-![default state](.)
+![default state](./assets/images/Screenshot%201.png)
+![activated state](./assets/images/Screenshot%202.png)
+
+---
+
+## Credits
+
+https://developer.mozilla.org/en-US/ 
+
+* used for refrence
+
+https://www.w3schools.com/
+
+* used for refrance
+
+
